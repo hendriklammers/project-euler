@@ -11,8 +11,20 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 (function() {
 	'use strict';
 
-	var sum = 0;
+	var sum = 0,
+		t1 = 1,
+		t2 = 2,
+		t3 = 0;
 
-	
+	while (t3 < 4000000) {
+		t3 = t1 + t2;
+		t1 = t2;
+		t2 = t3;
 
+		if (t1 % 2 === 0) {
+			sum += t1;
+		}
+	}
+
+	console.log(sum);
 }());
