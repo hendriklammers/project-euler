@@ -15,6 +15,20 @@ Find the difference between the sum of the squares of the first one hundred natu
 (function() {
 	'use strict';
 
-	
-	
+	function solveProblem () {
+		var sumOfSquares = 0,
+			squareOfSum = 0,
+			result = 0;
+
+		for (var i = 1; i <= 100; i++) {
+			sumOfSquares += Math.pow(i, 2);
+			squareOfSum += i;
+		}
+
+		result = Math.pow(squareOfSum, 2) - sumOfSquares;
+		console.log(result);
+	}
+
+	solveProblem();
+
 }());
