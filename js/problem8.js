@@ -45,41 +45,4 @@
 
 	console.log(findGreatestProduct(numbers, 5));	// Result
 
-
-	// TODO: Make it work!
-	function findSequence (num) {
-		var previousNumber = parseInt(num[0], 10),
-			currentNumber = 0,
-			seqLenght = 0,
-			currentSequence = [previousNumber],
-			sequences = [],
-			isSequence = false;
-
-		for (var i = 1; i < num.length; i++) {
-			currentNumber = parseInt(num[i], 10);
-
-			if (currentNumber === previousNumber + 1) {
-				isSequence = true;
-				seqLenght++;
-				currentSequence.push(currentNumber);
-
-				if (seqLenght === 4) {
-					console.log('Found five consecutive digits');
-				}
-			} else {
-				isSequence = false;
-				seqLenght = 0;
-
-				if (currentSequence.length === 5) {
-					sequences.push(currentSequence);
-				}
-				currentSequence = [currentNumber];
-			}
-
-			previousNumber = currentNumber;
-		}
-
-		return sequences;
-	}
-
 }());
