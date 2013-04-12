@@ -13,6 +13,28 @@ Find the product abc.
 (function() {
 	'use strict';
 
-	
+	var findSolution = function() {
+		for (var a = 1; a <= 998; a++) {
+
+			var rest = 1000 - a;
+
+			for (var b = 1; b < rest; b++) {
+
+				var c = rest - b;
+
+				if ((a * a) + (b * b) === (c * c)) {
+
+					// Result
+					console.log('a: ' + a + '\nb: ' + b + '\nc: ' + c);
+					console.log('product: ' + (a * b * c));
+
+					return;
+				}
+
+			}
+		}
+	};
+
+	findSolution();	
 	
 }());
