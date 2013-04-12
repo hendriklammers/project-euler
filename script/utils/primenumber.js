@@ -3,7 +3,7 @@
  * @param  {Number}  value The number to check
  * @return {Boolean}       Is the given value a Prime Number or not.
  */
-function isPrimeNumber (value) {
+var isPrimeNumber = function(value) {
 	var max = Math.sqrt(value);
 	// Do some checks to prevent the loop from running for numbers that are obvious
 	if (isNaN(value) || !isFinite(value) || value % 1 || value < 2) {
@@ -26,4 +26,4 @@ function isPrimeNumber (value) {
 		}
 	}
 	return true;
-}
+};
