@@ -115,6 +115,7 @@
 			searchDiagonal();
 			searchDiagonal2();
 			
+			// TODO: Remove repeating code, refactor
 		};
 
 	findSolution();	
