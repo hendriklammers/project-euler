@@ -27,9 +27,9 @@
 
 		numRows = grid.length,
 		numColumns = grid[0].length,
+		result = 0,
 
-		searchHorizontal = function() {
-			var product = 0;
+		searchHorizontal = function(startValue) {
 			
 			for (var row = 0; row < numRows; row++) {
 				for (var col = 0; col <= numColumns - LENGTH; col++) {
@@ -39,17 +39,16 @@
 						p *= grid[row][col + j];
 					}
 
-					if (p > product) {
-						product = p;
+					if (p > startValue) {
+						startValue = p;
 					}
 				}
 			}
 
-			console.log('horizontal: ' + product);
+			return startValue;
 		},
 
-		searchVertical = function() {
-			var product = 0;
+		searchVertical = function(startValue) {
 
 			for (var col = 0; col < numColumns; col++) {
 				for (var row = 0; row <= numRows - LENGTH; row++) {
@@ -59,61 +58,50 @@
 						p *= grid[row + j][col];
 					}
 
-					if (p > product) {
-						product = p;
+					if (p > startValue) {
+						startValue = p;
 					}
 				}
 			}
 
-			console.log('vertical: ' + product);
+			return startValue;
 		},
 
-		searchDiagonal = function() {
-			var product = 0;
+		searchDiagonal = function(startValue) {
 
 			for (var row = 0; row <= numRows - LENGTH; row++) {
-				for (var col = 0; col <= numColumns - LENGTH; col++) {
-					var p = grid[row][col];
+				for (var col = 0; col < numColumns; col++) {
+					var l, r;
+
+					l = r = grid[row][col];
 
 					for (var j = 1; j < LENGTH; j++) {
-						p *= grid[row + j][col + j];
+						// Going down and right
+						r *= grid[row + j][col + j];
+
+						// Going down and left
+						l *= grid[row + j][col - j];
 					}
 
-					if (p > product) {
-						product = p;
+					if (r > startValue) {
+						startValue = r;
+					}
+
+					if (l > startValue) {
+						startValue = l;
 					}
 				}
 			}
 
-			console.log('diagonal: ' + product);
-		},
-
-		searchDiagonal2 = function() {
-			var product = 0;
-
-			for (var row = 0; row <= numRows - LENGTH; row++) {
-				for (var col = LENGTH - 1; col < numColumns; col++) {
-					var p = grid[row][col];
-
-					for (var j = 1; j < LENGTH; j++) {
-						p *= grid[row + j][col - j];
-					}
-
-					if (p > product) {
-						product = p;
-					}
-				}
-			}
-
-			console.log('diagonal 2: ' + product);
+			return startValue;
 		},
 
 		findSolution = function() {
 
-			searchHorizontal();
-			searchVertical();
-			searchDiagonal();
-			searchDiagonal2();
+			result = searchHorizontal(result);
+			result = searchVertical(result);
+			result = searchDiagonal(result);
+			console.log(result);
 			
 			// TODO: Remove repeating code, refactor
 		};
