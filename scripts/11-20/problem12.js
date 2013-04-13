@@ -25,9 +25,36 @@ What is the value of the first triangle number to have over five hundred divisor
 	'use strict';
 
 	var startTime = new Date().getTime(),
+
+		findDevisors = function(value) {
+			var devisors = [];
+
+			for (var i = 0; i <= value; i++) {
+				if (value % i === 0) {
+					devisors.push(i);
+				}
+			}
+
+			return devisors;
+		},
 		
 		findSolution = function() {
-			
+			// TODO: Make method that iterates over triangle numbers
+			// TODO: Make a method that finds the divisors
+
+			var currentTriangle = 0,
+				triangles = [1],
+				count = 0;
+
+			// FIX: Takes too much time, hangs...
+			for (var i = 2; i <= 1000; i++) {
+				var n = triangles[triangles.length - 1] + i;
+				triangles.push(n);
+
+				count = findDevisors(n).length;
+			}
+
+			console.log(count);
 		};
 
 	findSolution();
