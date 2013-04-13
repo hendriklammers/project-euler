@@ -16,6 +16,7 @@
 		grid = (function() {
 			var arr = [];
 
+			// Create 20*20 grid filled with integers
 			gridString.split(' ').forEach(function(num, index) {
 				var row = Math.floor(index / 20);
 				if (index % 20 === 0) {
