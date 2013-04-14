@@ -21,53 +21,59 @@ What is the value of the first triangle number to have over five hundred divisor
  * http://projecteuler.net/problem=12
  */
 
-(function() {
+var problem12 = (function() {
 	'use strict';
 
-	var startTime = new Date().getTime(),
+	var MIN_DIVISORS = 500,
+		startTime,
 
-		findDevisors = function(value) {
-			// var devisors = [];
+		findDivisors = function(value) {
+			// var divisors = [];		// Put the found divisors in an array
 			var count = 0;
 
 			for (var i = 0; i <= Math.sqrt(value); i++) {
 				if (value % i === 0) {
 					count += 2;
-					// devisors.push(i);
-					// devisors.push(value / i);
+					// divisors.push(i);
+					// divisors.push(value / i);
 				}
 			}
 
-			// return devisors;
 			return count;
 		},
 		
 		findSolution = function() {
-			// TODO: Make method that iterates over triangle numbers
-			// TODO: Use object literal notation
-
 			var currentTriangle = 0,
-				triangles = [1],
-				count = 0;
+				divisorCount = 0,
+				index = 1;
 
-			// Start at 1000 to save some time
-			for (var i = 1; i <= 15000; i++) {
-				currentTriangle = currentTriangle + i;
+			// Iterate till the divisorCount is bigger than 500
+			while (divisorCount < MIN_DIVISORS) {
+				// Triangle number
+				currentTriangle = currentTriangle + index;
 
-				// var n = triangles[triangles.length - 1] + i;
-				// triangles.push(n);
+				// Number of divisors for the triangle number
+				divisorCount = findDivisors(currentTriangle);
 
-				var divisors = findDevisors(currentTriangle);
-
-				if (divisors > 500) {
-					console.log(currentTriangle);
-					return;
-				}
+				index++;
 			}
+
+			console.log('Triangle number: ' + currentTriangle);		// Result
+			console.log('Number of divisors: ' + divisorCount);
+
+			// Show the elapsed time
+			console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
 		};
 
-	findSolution();
+	return {
+		init: function() {
+			startTime = new Date().getTime();
+			
+			findSolution();
+		},
 
-	console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
-	
+		findDivisors: findDivisors
+	};
 }());
+
+problem12.init();
