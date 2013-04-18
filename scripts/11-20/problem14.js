@@ -24,7 +24,41 @@ var problem14 = (function() {
 	var startTime,
 		
 		findSolution = function() {
-			
+			var longest = 0,
+				startingNumber = 0;
+
+			// Only go through the odd numbers
+			for (var i = 3; i < 999999; i++) {
+				var num = i,
+					chain = 1;
+
+				// Keep on going till it has reached 1
+				while (num >= 2) {
+					num = processNumber(num);
+					chain++;
+				}
+
+				// Store the longest chain and it's starting number
+				if (chain > longest) {
+					longest = chain;
+					startingNumber = i;
+				}
+			}
+
+			// Result
+			console.log('Starting number: ' + startingNumber);
+			console.log('Length of chain is: ' + longest);
+		},
+
+		processNumber = function(value) {
+			// Apply Collatz rule to the number
+			if (value % 2 === 0) {
+				// If even
+				return value / 2;
+			} else {
+				// If odd
+				return (3 * value) + 1;
+			}
 		};
 
 	return {
