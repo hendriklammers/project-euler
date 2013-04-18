@@ -21,20 +21,18 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 var problem14 = (function() {
 	'use strict';
 
-	var startTime,
-		
-		findSolution = function() {
+	var findSolution = function() {
 			var longest = 0,
 				startingNumber = 0;
 
-			// Only go through the odd numbers
-			for (var i = 3; i < 999999; i++) {
+			// Just try everything below 1 million
+			for (var i = 2; i < 1000000; i++) {
 				var num = i,
 					chain = 1;
 
 				// Keep on going till it has reached 1
 				while (num >= 2) {
-					num = processNumber(num);
+					num = applyCollatz(num);
 					chain++;
 				}
 
@@ -47,10 +45,10 @@ var problem14 = (function() {
 
 			// Result
 			console.log('Starting number: ' + startingNumber);
-			console.log('Length of chain is: ' + longest);
+			console.log('Length of longest chain: ' + longest);
 		},
 
-		processNumber = function(value) {
+		applyCollatz = function(value) {
 			// Apply Collatz rule to the number
 			if (value % 2 === 0) {
 				// If even
@@ -63,7 +61,7 @@ var problem14 = (function() {
 
 	return {
 		init: function() {
-			startTime = new Date().getTime();
+			var startTime = new Date().getTime();
 			
 			findSolution();
 
