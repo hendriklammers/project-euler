@@ -1,9 +1,12 @@
 /**
- * Power digit sum
+ * Factorial digit sum
  *
- * 215 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+ * n! means n  (n  1)  ...  3  2  1
 
-What is the sum of the digits of the number 2 1000?
+For example, 10! = 10  9  ...  3  2  1 = 3628800,
+and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+
+Find the sum of the digits in the number 100!
  *
  * http://projecteuler.net/problem=20
  */
@@ -11,26 +14,28 @@ What is the sum of the digits of the number 2 1000?
 var problem20 = (function() {
 	'use strict';
 
-	var STARTING_NUM = 2,
-		POWER = 1000,
+	var STARTING_NUM = 100,
 
 		findSolution = function() {
-			var total = raisePower(STARTING_NUM, POWER),
-				sum = 0;
-
-			for (var i = 0; i < total.length; i++) {
-				sum += total[i];
-			}
-
-			// Result
-			console.log(sum);
+			
 		},
 
-		multiplyNumber = function(num, multiplier) {
+		/**
+		 * Method to multiply large numbers
+		 * @param  {Array} num  The number that should be multiplied, array format
+		 * @param  {Number} multiplier The value that should be used to multiply the number with
+		 * @return {Array} The end product in array format, each digit has it's own cell.
+		 */
+		multiplyLarge = function(num, multiplier) {
 			var result = [],
 				n = 0,
 				rest = 0,
 				restArray = [];
+
+			// When typeof num is Number convert to array
+			if (typeof num === 'number') {
+				num = String.prototype.split.call(num, '');
+			}
 
 			// Start at the last available digit
 			for (var i = num.length - 1; i >= 0; i--) {
@@ -69,9 +74,7 @@ var problem20 = (function() {
 
 			// Show the elapsed time
 			console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
-		},
-
-		multiplyNumber: multiplyNumber
+		}
 	};
 }());
 
