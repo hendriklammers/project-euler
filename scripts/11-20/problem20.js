@@ -17,7 +17,22 @@ var problem20 = (function() {
 	var STARTING_NUM = 100,
 
 		findSolution = function() {
-			
+			// Start with an array
+			var product = String.prototype.split.call(STARTING_NUM, ''),
+				sum = 0;
+
+			// Calculate product
+			for (var i = STARTING_NUM - 1; i > 0; i--) {
+				product = multiplyLarge(product, i);
+			}
+
+			// Calculate sum
+			for (var j = 0; j < product.length; j++) {
+				sum += product[j];
+			}
+
+			// ANSWER TO PROBLEM 20
+			console.log(sum);
 		},
 
 		/**
