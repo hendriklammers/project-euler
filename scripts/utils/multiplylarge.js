@@ -4,7 +4,6 @@
  * @param  {Number} multiplier The value that should be used to multiply the number with
  * @return {Array} The end product in array format, each digit has it's own cell.
  */
-// TODO: Rewrite to also take Number types
 var multiplyLarge = function(num, multiplier) {
 	var result = [],
 		n = 0,
