@@ -13,13 +13,65 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
 var problem17 = (function () {
     'use strict';
 
-    var numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
-        'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
-        'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
-        'hundred', 'thousand'],
+    var numbers = [['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+        'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
+        ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
+        ['hundred', 'thousand']],
+        toHundred = [],
+        toThousand = [],
+        total = [],
 
     findSolution = function () {
+        // To thousand
+        for (var l = 0; l < 10; l++) {
+            var hundred;
 
+            if (l > 0) {
+                hundred = numbers[0][l] + 'hundred';
+                total.push(hundred);
+            }
+
+            // First count to hundred
+            for (var i = -1; i < 8; i++) {
+                if (i === -1) {
+                    for (var j = 1; j < 20; j++) {
+                        if (l > 0) {
+                            total.push(hundred + 'and' + numbers[0][j]);
+                        } else if (l === 0) {
+                            total.push(numbers[0][j]);
+                        }
+                    }
+                } else {
+                    if (l > 0) {
+                        total.push(hundred + 'and' + numbers[1][i]);
+                    } else if (l === 0) {
+                        total.push(numbers[1][i]);
+                    }
+
+                    for (var k = 1; k < 10; k++) {
+                        var combinedNumber = numbers[1][i] + numbers[0][k];
+                        if (l > 0) {
+                            total.push(hundred + 'and' + combinedNumber);
+                        } else if (l === 0) {
+                            total.push(combinedNumber);
+                        }
+                    }
+                }
+            }
+        }
+
+        total.push('onethousand');
+        console.log(countLetters(total));
+    },
+
+    countLetters = function(words) {
+        var count = 0;
+
+        for (var i = 0; i < words.length; i++) {
+            count += words[i].length;
+        }
+
+        return count;
     };
 
     return {
