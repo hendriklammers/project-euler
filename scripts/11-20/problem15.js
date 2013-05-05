@@ -10,6 +10,7 @@ How many such routes are there through a 20*20 grid?
  * http://projecteuler.net/problem=15
  */
 // TODO: Create canvas animation of the routes, just for fun
+// TODO: Try math solution?
 var problem15 = (function() {
 	'use strict';
 
