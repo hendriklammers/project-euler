@@ -10,15 +10,20 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
  * http://projecteuler.net/problem=17
  */
 
-var problem17 = (function() {
+var problem17 = (function () {
     'use strict';
 
-    var findSolution = function() {
-            
+    var numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+        'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
+        'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
+        'hundred', 'thousand'],
+
+    findSolution = function () {
+
     };
 
     return {
-        init: function() {
+        init: function () {
             var startTime = new Date().getTime();
 
             findSolution();
