@@ -9,7 +9,7 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
  *
  * http://projecteuler.net/problem=17
  */
-
+// TODO: Refactor everything
 var problem17 = (function () {
     'use strict';
 
@@ -17,8 +17,6 @@ var problem17 = (function () {
         'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
         ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
         ['hundred', 'thousand']],
-        toHundred = [],
-        toThousand = [],
         total = [],
 
     findSolution = function () {
@@ -34,6 +32,7 @@ var problem17 = (function () {
             // First count to hundred
             for (var i = -1; i < 8; i++) {
                 if (i === -1) {
+                    // First go to twenty
                     for (var j = 1; j < 20; j++) {
                         if (l > 0) {
                             total.push(hundred + 'and' + numbers[0][j]);
@@ -82,6 +81,9 @@ var problem17 = (function () {
 
             // Show the elapsed time
             console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
+
+            // Exit Phantomjs
+            phantom.exit();
         }
     };
 }());
