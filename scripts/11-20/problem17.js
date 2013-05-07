@@ -9,60 +9,71 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
  *
  * http://projecteuler.net/problem=17
  */
-// TODO: Refactor everything
 var problem17 = (function () {
     'use strict';
 
-    var numbers = [['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
-        'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
-        ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
-        ['hundred', 'thousand']],
-        total = [],
+    var numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+            'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'],
+        tens = ['ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'],
 
-    findSolution = function () {
-        // To thousand
-        for (var l = 0; l < 10; l++) {
-            var hundred;
+    findSolution = function() {
+        var letterCount = 0;
 
-            if (l > 0) {
-                hundred = numbers[0][l] + 'hundred';
-                total.push(hundred);
-            }
+        // 1 iteration for each hundred
+        for (var i = 0; i < 10; i++) {
+            letterCount += countLetters(writeHundred(i));
+        }
 
-            // First count to hundred
-            for (var i = -1; i < 8; i++) {
-                if (i === -1) {
-                    // First go to twenty
-                    for (var j = 1; j < 20; j++) {
-                        if (l > 0) {
-                            total.push(hundred + 'and' + numbers[0][j]);
-                        } else if (l === 0) {
-                            total.push(numbers[0][j]);
-                        }
-                    }
-                } else {
-                    if (l > 0) {
-                        total.push(hundred + 'and' + numbers[1][i]);
-                    } else if (l === 0) {
-                        total.push(numbers[1][i]);
-                    }
+        // Goes to 999 so add 'onethousand'
+        letterCount += 'onethousand'.length;
 
-                    for (var k = 1; k < 10; k++) {
-                        var combinedNumber = numbers[1][i] + numbers[0][k];
-                        if (l > 0) {
-                            total.push(hundred + 'and' + combinedNumber);
-                        } else if (l === 0) {
-                            total.push(combinedNumber);
-                        }
-                    }
+        // RESULT
+        console.log(letterCount);
+    },
+
+    writeHundred = function(hundred) {
+        var words = [],
+            century = '';
+
+        // When hundred argument is over 0, meaning it's in the hundreds get the word for it.
+        // Pass to century var and make sure first entry in array is the hundred.
+        if (hundred > 0) {
+            century = numbers[hundred - 1] + 'hundred';
+            // Add clean century first
+            words.push(century);
+
+            // Append 'and'
+            century += 'and';
+        }
+
+        // There are 10 tens in hundred but firs iteration goes to 20
+        for (var i = 0; i < 9; i++) {
+
+            if (i === 0) {
+                // First count to twenty
+                for (var j = 0; j < 19; j++) {
+                    words.push(century + numbers[j]);
+                }
+            } else {
+                // Push clean ten first
+                words.push(century + tens[i]);
+
+                for (var k = 0; k < 9; k++) {
+                    var combinedNumber = tens[i] + numbers[k];
+
+                    words.push(century + combinedNumber);
                 }
             }
         }
 
-        total.push('onethousand');
-        console.log(countLetters(total));
+        return words;
     },
 
+    /**
+     * Count the total amount of letters from an array with words
+     * @param  {Array} words 
+     * @return {Number} Combined lettercount from all words in the array
+     */
     countLetters = function(words) {
         var count = 0;
 
@@ -82,8 +93,8 @@ var problem17 = (function () {
             // Show the elapsed time
             console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
 
-            // Exit Phantomjs
-            phantom.exit();
+            // Phantomjs
+            // phantom.exit();
         }
     };
 }());
