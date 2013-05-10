@@ -49,12 +49,15 @@ var problem15 = (function() {
 		canvasAnimation = {
 			init: function() {
 				// Create canvas element
-				this.canvas = document.createElement('canvas');
-				this.canvas.width = 800;
-				this.canvas.height = 600;
-				this.canvas.id = 'canvas-animation';
-				document.getElementById('output').appendChild(this.canvas);
-				// Set context
+				var canvas = document.createElement('canvas');
+				canvas.width = 800;
+				canvas.height = 600;
+				canvas.id = 'canvas-animation';
+				canvas.style.display = 'block';
+				canvas.style.margin = '0 auto';
+				document.getElementById('output').appendChild(canvas);
+				// Set canvas and context on this object
+				this.canvas = canvas;
 				this.context = this.canvas.getContext('2d');
 
 				// Animation loop, bind scope
@@ -75,8 +78,8 @@ var problem15 = (function() {
 				// Start with a blank canvas every render cycle
 				this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-				this.context.fillStyle = '#ff777c';
-				this.context.fillRect(100, 100, 200, 150);
+				this.context.fillStyle = '#ebf0ff';
+				this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 			}
 		};
 
