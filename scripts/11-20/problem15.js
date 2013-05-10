@@ -44,6 +44,40 @@ var problem15 = (function() {
 			if (y < endY) {
 				findPath(x, y + 1);
 			}
+		},
+
+		canvasAnimation = {
+			init: function() {
+				// Create canvas element
+				this.canvas = document.createElement('canvas');
+				this.canvas.width = 800;
+				this.canvas.height = 600;
+				this.canvas.id = 'canvas-animation';
+				document.getElementById('output').appendChild(this.canvas);
+				// Set context
+				this.context = this.canvas.getContext('2d');
+
+				// Animation loop, bind scope
+				window.requestAnimationFrame(this.animationLoop.bind(this));
+			},
+
+			animationLoop: function() {
+				var self = this;
+
+				setTimeout(function() {
+					window.requestAnimationFrame(self.animationLoop.bind(self));
+
+					self.renderCanvas();
+				}, 1000 / 60);
+			},
+
+			renderCanvas: function() {
+				// Start with a blank canvas every render cycle
+				this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+				this.context.fillStyle = '#ff777c';
+				this.context.fillRect(100, 100, 200, 150);
+			}
 		};
 
 	return {
@@ -54,8 +88,12 @@ var problem15 = (function() {
 
 			// Show the elapsed time
 			console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
+		},
+
+		initCanvasAnimation: function() {
+			canvasAnimation.init();
 		}
 	};
 }());
 
-problem15.init();
+problem15.initCanvasAnimation();
