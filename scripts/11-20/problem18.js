@@ -18,11 +18,18 @@ That is, 3 + 7 + 4 + 9 = 23.
 
 var problem18 = (function() {
 	'use strict';
-
+    //TODO: Solve problem by starting at the bottom of the triangle
+    
 	var triangle = [],
 	
 	    findSolution = function() {
 			var startTime = new Date().getTime();
+			
+			// Bruteforce using recursion
+			var result = findPath(0, 0);
+			
+			// Show result
+			console.log(result);
 			
 			// Show the elapsed time
 			console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
@@ -45,6 +52,20 @@ var problem18 = (function() {
 		    }
 		    
 		    findSolution();
+		},
+		
+		// Recursive method that returns the biggest sum path
+		findPath = function(x, y) {
+		    // All numbers in the array are still strings so parse it first..
+		    var currentNum = parseInt(triangle[y][x], 10);
+		    
+		    // When at the bottom of the triangle
+		    if (y === triangle.length - 1) {
+		        return currentNum;
+		    } else {
+		        // Get biggest path from the 2 numbers on the row below this one.
+		        return Math.max(currentNum + findPath(x, y + 1), currentNum + findPath(x + 1, y + 1));
+		    }
 		};
 
 	return {
