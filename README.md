@@ -2,7 +2,7 @@
 My solutions for the Project Euler problems.  
 All done in Javascript, mostly using brute force.
 
-Number of problems solved: **20**  
-Currently working on: **19**
+Number of problems solved: **21**  
+Currently working on: **21**
 
 [http://projecteuler.net](http://projecteuler.net)
