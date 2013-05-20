@@ -70,13 +70,31 @@ var problem19 = (function() {
             
             // Result
             console.log(sundays);
+        },
+        
+        // Solution from someone else on the forum which is obviously much better than mine...
+        forumSolution = function() {
+            var result = 0;
+            
+            for(var y= 1901; y < 2001; y++) {
+                for(var m = 1; m < 13; m++) {
+                    var d = new Date(y, m, 1, 0, 0, 0, 0);
+
+                    if (d.getDay() === 0) {
+                        result += 1;
+                    }
+                }
+            }
+            
+            console.log(result);
         };
 
     return {
         init: function() {
             var startTime = new Date().getTime();
             
-            findSolution();
+            //findSolution();
+            forumSolution();
 
             // Show the elapsed time
             console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
