@@ -18,16 +18,8 @@ That is, 3 + 7 + 4 + 9 = 23.
 
 var problem18 = (function() {
 	'use strict';
-    //TODO: Solve problem by starting at the bottom of the triangle
     
 	var triangleData = [],
-	
-	    exampleTriangle = [
-	        [3],
-            [7, 4],
-            [2, 4, 6],
-            [8, 5, 9, 3]
-	    ],
 	    result,
 	
 	    findSolution = function() {
@@ -84,37 +76,38 @@ var problem18 = (function() {
 		    }
 		},
 		
+		// A somewhat smarter method that starts at the bottom of the triangle to find the result
 		findMaximumPath = function(triangle) {
 		    // Temporary array with highest of current row
-		    var tempRow = [],
-		        copy = [],
+		    var highestRow = [],
+		        copyRow = [],
 		        rowLength;
 		    
 		    // Go over each row
 		    for (var i = triangle.length - 1; i >= 0; i--) {
 		        rowLength = triangle[i].length;
-		        copy = [];
+		        copyRow = [];
 		        
 		        for (var k = 0; k < rowLength; k++) {
-		            if (tempRow.length > 0) {
-		                copy[k] = parseInt(triangle[i][k], 10) + tempRow[k];
+		            if (highestRow.length > 0) {
+		                copyRow[k] = parseInt(triangle[i][k], 10) + highestRow[k];
 		            } else {
-		                copy[k] = parseInt(triangle[i][k], 10);
+		                copyRow[k] = parseInt(triangle[i][k], 10);
 		            }
 		        }
-		        console.log(copy);
 
 		        // Start with empty row
-		        tempRow = [];
+		        highestRow = [];
 		        // Only needed when not at the top row
 		        if (i > 0) {
                     for (var j = 0; j < rowLength - 1; j++) {
-                        tempRow.push(Math.max(copy[j], copy[j + 1]));
+                        highestRow.push(Math.max(copyRow[j], copyRow[j + 1]));
                     }
 		        }
 		    }
 		    
-		    return copy[0];
+		    // The last array only contains the highest sum
+		    return copyRow[0];
 		};
 
 	return {
