@@ -19,18 +19,38 @@ That is, 3 + 7 + 4 + 9 = 23.
 var problem18 = (function() {
 	'use strict';
 
-	var findSolution = function() {
+	var triangle = [],
+	
+	    findSolution = function() {
+			var startTime = new Date().getTime();
 			
+			// Show the elapsed time
+			console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
+		},
+		
+		loadData = function() {
+            var request = new XMLHttpRequest();
+            request.onload = dataLoadHandler;
+            request.open('get', 'data/problem18_triangle.txt', true);
+            request.send();
+		},
+		
+		dataLoadHandler = function() {
+		    var data = this.responseText;
+		    
+		    triangle = data.split('\n');
+		    
+		    for (var i in triangle) {
+		        triangle[i] = triangle[i].split(' ');
+		    }
+		    
+		    findSolution();
 		};
 
 	return {
 		init: function() {
-			var startTime = new Date().getTime();
-			
-			findSolution();
-
-			// Show the elapsed time
-			console.log('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
+			// Load data before starting with the actual solution
+			loadData();
 		}
 	};
 }());
