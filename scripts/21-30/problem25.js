@@ -60,6 +60,39 @@ var problem25 = (function() {
         
         findSolution: function() {
             
+        },
+        
+        // TODO: Make it possible to add multiple numbers
+        // TODO: Accept numbers as argument
+        addLargeNumbers: function(num1, num2) {
+            var sum = [],
+                len = Math.max(num1.length, num2.length),
+                rest = 0;
+            
+            // Go through every digit of the longest number
+            for (var i = 0; i < len; i++) {
+                // Get the last number when available from both arrays
+                var total = rest + (num1.pop() || 0) + (num2.pop() || 0),
+                    n = total % 10;
+                    
+                // Save the rest, it moves one digit to the left -> divide by 10
+                rest = (total - n) / 10;
+                
+                // Add digit to front of sum array    
+                sum.unshift(n);
+            }
+            
+            // Add what's left after going through all the digits
+        	if (rest > 0) {
+                // Convert the number to an array
+        		var arr = String.prototype.split.call(rest, '');
+        		
+        		for (var j = arr.length - 1; j >= 0; j--) {
+        			sum.unshift(parseInt(arr[j], 10));
+        		}
+        	}
+            
+            return sum;
         }
     };
 }());
