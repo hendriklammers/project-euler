@@ -35,6 +35,7 @@ var multiplyLarge = function(num, multiplier) {
 	
 	// Add what's left after going through all the digits
 	if (rest > 0) {
+	    // TODO: Test if this slice method is correct!?!!
 		restArray = (rest + '').slice('');
 		for (var j = restArray.length - 1; j >= 0; j--) {
 			result.unshift(parseInt(restArray[j], 10));
