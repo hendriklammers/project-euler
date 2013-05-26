@@ -14,4 +14,11 @@ describe('addLargeNumbers method', function() {
   it('should give correct sum when the adding of first two digits will total more than 10', function() {
     expect(problem25.addLargeNumbers([7, 3], [8, 5])).toEqual([1, 5, 8]);
   });
+  
+  it('should work with zeros', function() {
+    expect(problem25.addLargeNumbers([0], [5])).toEqual([5]);
+    expect(problem25.addLargeNumbers([4, 0], [5, 0])).toEqual([9, 0]);
+    expect(problem25.addLargeNumbers([0], [0])).toEqual([0]);
+    expect(problem25.addLargeNumbers([1], [0])).toEqual([1]);
+  });
 });

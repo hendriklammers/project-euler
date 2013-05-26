@@ -36,7 +36,9 @@ var problem25 = (function() {
         
         updateOutput = function(text) {
             output.innerHTML = output.innerHTML + text + '<br>';
-        };
+        },
+        
+        NUM_DIGITS = 1000;
 
     return {
         init: function() {
@@ -55,20 +57,43 @@ var problem25 = (function() {
             this.findSolution();
 
             // Show the elapsed time
-            updateOutput('Time elapsed: ' + (new Date().getTime() - startTime) / 1000 + ' seconds');
+            updateOutput('Time elapsed: <strong>' + (new Date().getTime() - startTime) / 1000 + '</strong> seconds');
         },
         
+        // TODO: Try using recursion
         findSolution: function() {
+            // Set the first two numbers of the sequence
+            var count = 2,
+                fn1 = [1],
+                fn2 = [1],
+                fn = [];
+            
+            // Keep going till the Fibonacci number has enough digits
+            while (fn.length < NUM_DIGITS) {
+                var fn = this.addLargeNumbers(fn1, fn2);
+                
+                // Set numbers to use for next iteration
+                // Order is very important!
+                fn2 = fn1;
+                fn1 = fn;
+                
+                count ++;
+            }
+            
+            // Show result
+            updateOutput('First term to contain 1000 digits: <strong>' + count + '</strong>');
             
         },
         
         // TODO: Make it possible to add multiple numbers
         // TODO: Accept numbers as argument
         addLargeNumbers: function(num1, num2) {
-            var sum = [],
+            var num1 = num1.slice(0),
+                num2 = num2.slice(0),
+                sum = [],
                 len = Math.max(num1.length, num2.length),
                 rest = 0;
-            
+                
             // Go through every digit of the longest number
             for (var i = 0; i < len; i++) {
                 // Get the last number when available from both arrays
